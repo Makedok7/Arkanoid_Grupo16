@@ -1,35 +1,18 @@
-import Phaser from 'phaser'
-import React, { useEffect, useState } from 'react'
-import Escena from './components/Escena.js'
+import Home from './components/Home.js';
+import Juego from './components/Juego.js';
+import Desarrolladores from './components/Desarrolladores.js';
+import Error from './components/Error.js'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 export default function App() {
-
-  const [listo, setListo] = useState(false)
-
-  useEffect(() => {
-
-    var config = {
-      type: Phaser.AUTO,
-      width: 800,
-      height: 600,
-      physics: {
-        default: 'arcade',
-        arcade: {
-          gravity: { y: 800 }
-        }
-      },
-      scene:[Escena]
-    };
-
-    const game = new Phaser.Game(config);
-
-    game.events.on("LISTO", setListo)
-
-    return () => {
-      setListo(false);
-      game.destroy(true);
-    }
-
-  }, [listo]);
-
+  return (
+    <Router>
+      <Routes>
+        <Route path='/' element={<Home />} />;
+        <Route path='/juego' element={<Juego />} />;
+        <Route path='/desarrolladores' element={<Desarrolladores />} />;
+        <Route path='*' element={<Error />} />;
+      </Routes>
+    </Router>
+  );
 }
