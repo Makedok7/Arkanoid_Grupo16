@@ -2,24 +2,37 @@ import Phaser, { CANVAS } from 'phaser'
 import React, { useEffect, useState } from 'react'
 import Escena from './Escena.js'
 import Nav from './Nav.js';
+import Preload from './Preload.js';
+import Play from './Play.js';
+import Menu from './Menu.js';
 
 export default function Juego(){
     const [listo, setListo] = useState(false)
 
     useEffect(() => {
-  
-      var config = {
+      
+      const CONFIGURACION  = {
         type: Phaser.AUTO,
-        parent:'game',
-        width: 800,
-        height: 600,
+        scale:{
+          width:800,
+          height:600,
+        },
         physics: {
           default: 'arcade',
           arcade: {
             gravity: { y: 800 }
           }
         },
-        scene:[Escena]
+        parent:'game'
+      }
+
+      const Escenas = [Preload,Menu,Play]
+      const crearEscena = Scene => new Scene(CONFIGURACION)
+      const iniciarEscena = () => Escenas.map(crearEscena)
+
+      var config = {
+        ...CONFIGURACION,
+        scene:iniciarEscena()
       };
   
       const game = new Phaser.Game(config);
