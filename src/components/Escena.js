@@ -1,3 +1,4 @@
+
 class Escena extends Phaser.Scene {
 
     player = null;
@@ -6,6 +7,7 @@ class Escena extends Phaser.Scene {
     bricks = null;
     
     create() {
+        
 
         this.physics.world.setBoundsCollision(true, true, true, false);
 
@@ -33,10 +35,13 @@ class Escena extends Phaser.Scene {
 
         this.physics.add.collider(this.ball, this.player, this.hitPlayer, null, this)
         this.physics.add.collider(this.ball, this.bricks, this.hitBricks, null, this)
+
+        scoreText = this.add.text(16, 16, 'Puntuacion: 0', { fontSize: '32px', fill: '#FFF' });
+        
     }
 
     update() {
-
+        
         if (this.player.getData('hasBall')) {
             this.ball.x = this.player.x
         }
@@ -80,9 +85,12 @@ class Escena extends Phaser.Scene {
 
     hitBricks(ball, brick) {
         brick.disableBody(true, true)
+        score += 10;
+        scoreText.setText('Puntuacion: ' + score);
         if (this.bricks.countActive() == 0) {
             console.log("ganaste")
         }
+        //console.log(score);
     }
 
     resetBall() {
@@ -91,5 +99,8 @@ class Escena extends Phaser.Scene {
         this.player.setData('hasBall', true)
     }
 }
+
+var score = 0;
+var scoreText;
 
 export default Escena
