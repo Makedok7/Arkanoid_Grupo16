@@ -1,10 +1,13 @@
 import Phaser, { CANVAS } from 'phaser'
 import React, { useEffect, useState } from 'react'
-import Escena from './Escena.js'
-import Nav from './Nav.js';
+import Nav from '../Nav.js';
 import Preload from './Preload.js';
 import Play from './Play.js';
 import Menu from './Menu.js';
+import Nivel1 from './Nivel1.js';
+import Nivel2 from './Nivel2.js';
+import GameOver from './GameOver.js';
+import Win from './Win.js';
 
 export default function Juego(){
     const [listo, setListo] = useState(false)
@@ -23,10 +26,15 @@ export default function Juego(){
             gravity: { y: 800 }
           }
         },
-        parent:'game'
+        parent:'game',
+        playerLife:3,
+        playerScore:0,
+        scoreTotal:0,
+        playerLvl:'',
+        nextLvl:''
       }
 
-      const Escenas = [Preload,Menu,Play]
+      const Escenas = [Preload,Menu,Play,Nivel1,Nivel2,GameOver,Win]
       const crearEscena = Scene => new Scene(CONFIGURACION)
       const iniciarEscena = () => Escenas.map(crearEscena)
 
