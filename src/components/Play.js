@@ -1,14 +1,19 @@
+import Phaser from "phaser";
 
-class Escena extends Phaser.Scene {
+class Play extends Phaser.Scene{
 
-    player = null;
-    ball = null;
-    cursors = null;
-    bricks = null;
-    
-    create() {
+    constructor(config){
+        super('Play')
+
+        this.config = config
+
+        this.player = null;
+        this.ball = null;
+        this.bricks = null;
+    }
+
+    create(){
         
-
         this.physics.world.setBoundsCollision(true, true, true, false);
 
         this.player = this.physics.add.sprite(400, 550, 'player');
@@ -16,7 +21,7 @@ class Escena extends Phaser.Scene {
         this.player.setImmovable();
         this.player.setCollideWorldBounds(true);
         this.player.setData('hasBall', true);
-        this.player.setData('life', 3)
+        this.player.setData('life', 3);
 
         this.ball = this.physics.add.sprite(this.player.x, this.player.y - 50, 'ball')
         this.ball.body.allowGravity = false;
@@ -31,17 +36,13 @@ class Escena extends Phaser.Scene {
             gridAlign: { width: 8, height: 4, cellWidth: 64, cellHeight: 32, x: 176, y: 100 }
         });
 
-        this.cursors = this.input.keyboard.createCursorKeys();
-
-        this.physics.add.collider(this.ball, this.player, this.hitPlayer, null, this)
+        this.physics.add.collider(this.ball, this.player, this.hitPlayer, null, this);
         this.physics.add.collider(this.ball, this.bricks, this.hitBricks, null, this)
 
-        scoreText = this.add.text(16, 16, 'Puntuacion: 0', { fontSize: '32px', fill: '#FFF' });
-        
     }
 
     update() {
-        
+
         if (this.player.getData('hasBall')) {
             this.ball.x = this.player.x
         }
@@ -50,7 +51,7 @@ class Escena extends Phaser.Scene {
             this.player.x = pointer.x;
         }, this);
 
-        this.input.on('pointerup', function (pointer) {
+        this.input.on('pointerdown', function (pointer) {
             if (this.player.getData('hasBall')) {
                 this.ball.setVelocity(Phaser.Math.RND.sign() * 75, -400)
                 this.player.setData('hasBall', false)
@@ -68,6 +69,7 @@ class Escena extends Phaser.Scene {
             this.resetBall()
             this.player.setData('life', 3)
         }
+
     }
 
     hitPlayer() {
@@ -85,12 +87,9 @@ class Escena extends Phaser.Scene {
 
     hitBricks(ball, brick) {
         brick.disableBody(true, true)
-        score += 10;
-        scoreText.setText('Puntuacion: ' + score);
         if (this.bricks.countActive() == 0) {
             console.log("ganaste")
         }
-        //console.log(score);
     }
 
     resetBall() {
@@ -100,7 +99,4 @@ class Escena extends Phaser.Scene {
     }
 }
 
-var score = 0;
-var scoreText;
-
-export default Escena
+export default Play
