@@ -10,10 +10,15 @@ class Preload extends Phaser.Scene{
         //Ruta de las imagenes
         this.load.setPath('../images/');
         //Carga de las imagenes
-        this.load.image('player', 'player.png');
-        this.load.image('ball', 'ball.png');
-        this.load.atlas('bricks', 'bricks.png', 'bricks.json');
-        this.load.image('button','button.png')
+        this.load.image('background', 'background.png');
+        this.load.image('menu', 'menu.png');
+        this.load.image('gameOver', 'gameOver.jpg');
+        this.load.image('win', 'win.jpg');
+        this.load.image('level1', 'level1.png');
+        this.load.image('level2', 'level2.png');
+        //Carga de atlas de imagenes
+        this.load.atlas('assets','assets.png','assets.json')
+        this.load.atlas('buttons','buttons.png','buttons.json')
     }
 
     create(){
