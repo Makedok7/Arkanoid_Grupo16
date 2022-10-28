@@ -10,12 +10,14 @@ class Menu extends Phaser.Scene{
     }
 
     create(){
-        this.button = this.add.sprite(400,400,'button').setInteractive()
-        this.button2 = this.add.sprite(300,500,'button').setInteractive()
-        this.button3 = this.add.sprite(500,500,'button').setInteractive()
-        this.text = this.add.text(this.button.x,this.button.y,"Jugar")
-        this.text = this.add.text(this.button2.x,this.button2.y,"Nivel1")
-        this.text = this.add.text(this.button3.x,this.button3.y,"Nivel2")
+        this.image=this.add.image(400,300,'principal') 
+        this.button = this.add.sprite(400,370,'botonjugar').setInteractive()        
+        this.button2 = this.add.sprite(200,500,'level1').setInteractive()
+        this.button3 = this.add.sprite(600,500,'level2').setInteractive() 
+            
+        //this.text = this.add.text(this.button.x,this.button.y,"Jugar")
+        //this.text = this.add.text(this.button2.x,this.button2.y,"Nivel1")
+        //this.text = this.add.text(this.button3.x,this.button3.y,"Nivel2")
 
         this.button.on('pointerover',function(){
             this.setTint(0x094293)

@@ -9,11 +9,12 @@ class Win extends Phaser.Scene{
         this.text = null
     }
     create(){
-        this.button = this.add.sprite(400,400,'button').setInteractive()
-        this.button2 = this.add.sprite(400,500,'button').setInteractive()
-        this.text = this.add.text(this.button.x,this.button.y,"Siguiente Nivel")
-        this.text = this.add.text(this.button2.x,this.button2.y,"Menu")
-        this.add.text(10,10,"Ganaste")
+        this.button = this.add.sprite(400,400,'next').setInteractive()
+        this.button2 = this.add.sprite(400,500,'menu').setInteractive()
+        this.image=this.add.image(400,100,'youwin')
+        //this.text = this.add.text(this.button.x,this.button.y,"Siguiente Nivel")
+        //this.text = this.add.text(this.button2.x,this.button2.y,"Menu")
+        //this.add.text(10,10,"Ganaste")
 
         this.button.on('pointerover',function(){
             this.setTint(0x094293)

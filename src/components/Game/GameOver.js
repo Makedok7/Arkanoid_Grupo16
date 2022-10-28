@@ -9,11 +9,12 @@ class GameOver extends Phaser.Scene{
         this.text = null
     }
     create(){
-        this.button = this.add.sprite(400,400,'button').setInteractive()
-        this.button2 = this.add.sprite(400,500,'button').setInteractive()
-        this.text = this.add.text(this.button.x,this.button.y,"Reintentar")
-        this.text = this.add.text(this.button2.x,this.button2.y,"Menu")
-        this.add.text(10,10,"Perdiste")
+        this.button = this.add.sprite(400,400,'tryagain').setInteractive()
+        this.button2 = this.add.sprite(400,500,'menu').setInteractive()
+        this.image=this.add.image(400,100,'gameover')
+        //this.text = this.add.text(this.button.x,this.button.y,"Reintentar")
+        //this.text = this.add.text(this.button2.x,this.button2.y,"Menu")        
+        //this.add.text(10,10,"Perdiste")
 
         this.button.on('pointerover',function(){
             this.setTint(0x094293)

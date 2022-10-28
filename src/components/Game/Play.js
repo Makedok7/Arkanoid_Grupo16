@@ -11,20 +11,20 @@ class Play extends Phaser.Scene{
         this.player = data.player
         this.ball = data.ball
         this.bricks = data.bricks
-        this.physics = data.physics
+        this.physics = data.physics       
 
         this.physics.add.collider(this.ball, this.player, this.hitPlayer, null, this);
         this.physics.add.collider(this.ball, this.bricks, this.hitBricks, null, this);
 
-        this.scoreText = this.add.text(16, 16, 'Puntuacion: ' + this.config.playerScore, { fontSize: '32px', fill: '#FFF' });
-        this.lifeText = this.add.text(500, 16, 'Vidas: ' + this.config.playerLife, { fontSize: '32px', fill: '#FFF' });
+       // this.scoreText = this.add.text(16, 16, 'Puntuacion: ' + this.config.playerScore, { fontSize: '32px', fill: '#FFF' });
+       // this.lifeText = this.add.text(500, 16, 'Vidas: ' + this.config.playerLife, { fontSize: '32px', fill: '#FFF' });
 
     }
 
     update() {
 
-        this.scoreText.setText('Puntuacion:' + this.config.playerScore)
-        this.lifeText.setText('Vidas:' + this.config.playerLife)
+        //this.scoreText.setText('Puntuacion:' + this.config.playerScore)
+        //this.lifeText.setText('Vidas:' + this.config.playerLife)        
 
         if (this.player.getData('hasBall')) {
             this.ball.x = this.player.x
@@ -78,7 +78,7 @@ class Play extends Phaser.Scene{
 
     resetBall() {
         this.ball.setVelocity(0)
-        this.ball.setPosition(this.player.x, this.player.y - 50)
+        this.ball.setPosition(this.player.x, this.player.y - 25)
         this.player.setData('hasBall', true)
     }
 }
