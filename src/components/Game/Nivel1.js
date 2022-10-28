@@ -1,8 +1,8 @@
 import Phaser from "phaser";
 
-class Nivel1 extends Phaser.Scene{
+class Nivel1 extends Phaser.Scene {
 
-    constructor(config){
+    constructor(config) {
         super('Nivel1')
         this.config = config
         this.player = null;
@@ -12,34 +12,36 @@ class Nivel1 extends Phaser.Scene{
         this.lifeText = null;
     }
 
-    create(){
-        
+    create() {
         this.physics.world.setBoundsCollision(true, true, true, false);
-
-        this.player = this.physics.add.sprite(400, 550, 'player');
+        //Creacion del personaje
+        this.player = this.physics.add.sprite(400, 550, 'assets','player');
         this.player.body.allowGravity = false;
         this.player.setImmovable();
         this.player.setCollideWorldBounds(true);
         this.player.setData('hasBall', true);
-
-        this.ball = this.physics.add.sprite(this.player.x, this.player.y - 50, 'ball')
+        this.player.setScale(1.5)
+        //Creacion de la pelota
+        this.ball = this.physics.add.sprite(this.player.x, this.player.y - 24, 'assets','ball')
         this.ball.body.allowGravity = false;
         this.ball.setCollideWorldBounds(true);
         this.ball.setBounce(1);
-        this.ball.setScale(0.5);
-
+        this.ball.setScale(2.5);
+        //Creacion de los ladrillos
         this.bricks = this.physics.add.staticGroup({
-            key: 'bricks',
-            frame: ['orange', 'blue1', 'green', 'blue2'],
-            frameQuantity: 1,
-            gridAlign: { width: 8, height: 4, cellWidth: 64, cellHeight: 32, x: 176, y: 100 }
-        });
-
-        this.config.playerLvl='Nivel1'
-        this.config.nextLvl='Nivel2'
+            key: 'assets',
+            frame: ['brickBlue', 'brickRed'],
+            frameQuantity: 8,
+            setScale:{x:2,y:2},
+            gridAlign: { width: 8, height: 4, cellWidth: 64, cellHeight: 32, x: 192 , y: 100 }
+        })
+        this.bricks.children.iterateLocal('setSize',64,32)
+        //Actualizar valores de variables globales para las otras escenas
+        this.config.playerLvl = 'Nivel1'
+        this.config.nextLvl = 'Nivel2'
         this.config.scorePlayer = this.config.scoreTotal
-
-        this.scene.launch('Play',{player:this.player,ball:this.ball,bricks:this.bricks,physics:this.physics})
+        //Se ejecuta a la vez la escena Play y se pasan los datos para la escena play
+        this.scene.launch('Play', { player: this.player, ball: this.ball, bricks: this.bricks, physics: this.physics })
     }
 
 }
